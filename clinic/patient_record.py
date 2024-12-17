@@ -8,13 +8,6 @@ class PatientRecord:
         note_count tracks the total number of notes, starting at 1 for the first note.
         '''
         self.note_dao = NoteDAOPickle(number)
-        
-    def __str__(self):
-        '''
-        Returns a string representation of the PatientRecord object.
-        Useful for debugging and display.
-        '''
-        return f'PatientRecord({self.note_dao.note_count}, {self.note_dao.note_list})'
     
     def create_note(self, text: str):
         '''
