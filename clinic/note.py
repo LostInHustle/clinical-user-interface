@@ -18,28 +18,13 @@ class Note:
         Useful when the note's content is modified.
         '''
         self.timestamp = datetime.now()
-
-    def __str__(self: 'Note'):
-        '''
-        Returns a string representation of the Note object.
-        Useful for printing or displaying the note's details.
-        '''
-        return f'Note({self.code}, \"{self.text}\", \"{self.timestamp}\")'
-    
-    def __repr__(self: 'Note'):
-        '''
-        Returns the official string representation of the Note object.
-        This is the same as the __str__ method for consistency.
-        '''
-        return str(self)
     
     def __eq__(self: 'Note', other_note: 'Note'):
         '''
         Checks if two Note objects are equal.
         Returns True if both the code and text of the notes match.
         '''
-        if not isinstance(other_note, Note):
-            return False
+        if not isinstance(other_note, Note): return False
         check_code = (self.code == other_note.code)
         check_text = (self.text == other_note.text)
         return (check_code and check_text)
