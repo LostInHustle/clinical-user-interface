@@ -15,15 +15,6 @@ class Patient:
         self.address = address
         self.patient_record = PatientRecord(phn)
 
-    def __str__(self):
-        '''
-        Returns a string representation of the Patient object.
-        Useful for printing and displaying patient details.
-        '''
-        return f'Patient({self.phn}, \"{self.name}\",' + ' ' + \
-               f'\"{self.birth_date}\", \"{self.phone}\", \"{self.email}\",' + ' ' + \
-               f'\"{self.address}\", {self.patient_record})'
-
     def __eq__(self, other: 'Patient'):
         '''
         Compares the current Patient object with another Patient object.
@@ -36,5 +27,4 @@ class Patient:
                     self.phone == other.phone and 
                     self.email == other.email and
                     self.address == other.address)
-        else:
-            return False
+        else: return False
