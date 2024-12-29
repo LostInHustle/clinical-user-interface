@@ -12,6 +12,8 @@ class ChoosePatientGUI(QMainWindow):
         self.parent = parent
         self.controller = controller
         self.setWindowTitle("SELECT CURRENT PATIENT")
+        self.setFixedHeight(150)
+        self.setFixedWidth(350)
         layout = QGridLayout()
 
         label_current = QLabel("Current Patient")
@@ -23,9 +25,9 @@ class ChoosePatientGUI(QMainWindow):
         self.button_goback = QPushButton("Back")
 
         layout.addWidget(label_current, 0, 0)
-        layout.addWidget(self.text_current, 0, 1)
+        layout.addWidget(self.text_current, 0, 1, 1, 2)
         layout.addWidget(label_new_current, 1, 0)
-        layout.addWidget(self.text_new_current, 1, 1)
+        layout.addWidget(self.text_new_current, 1, 1, 1, 2)
         layout.addWidget(self.button_goback, 2, 0)
         layout.addWidget(self.button_set, 2, 1)
         layout.addWidget(self.button_unset, 2, 2)
