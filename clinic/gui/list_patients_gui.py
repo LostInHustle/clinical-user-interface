@@ -13,7 +13,8 @@ class ListPatientsGUI(QMainWindow):
         self.parent = parent
         self.controller = controller
         self.setWindowTitle("List Patients")
-        self.resize(600, 400)
+        self.setFixedWidth(600)
+        self.setFixedHeight(400)
 
         self.patient_table = QTableView()
         self.patient_model = PatientTableModel(self.controller)
