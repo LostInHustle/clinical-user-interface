@@ -1,5 +1,6 @@
 from clinic.controller import Controller
 from clinic.gui.patient_table_model import PatientTableModel
+from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import QMainWindow, QGridLayout, QVBoxLayout, QTableView
 from PyQt6.QtWidgets import QWidget, QLabel, QLineEdit, QPushButton, QMessageBox
 
@@ -13,15 +14,15 @@ class RetrievePatientGUI(QMainWindow):
         super().__init__()
         self.parent = parent
         self.controller = controller
-
         self.setWindowTitle("Retrieve Patients")
-        self.resize(600, 400)
+        self.setFixedSize(600, 400)
 
         self.patient_table = QTableView()
         self.patient_model = PatientTableModel(self.controller)
         self.patient_table.setModel(self.patient_model)
 
         self.retrieve_label = QLabel("Enter Keyword")
+        self.retrieve_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.text_keyword = QLineEdit()
         self.retrieve_button = QPushButton("Retrieve")
         self.back_button = QPushButton("Back")
@@ -35,7 +36,7 @@ class RetrievePatientGUI(QMainWindow):
         sub_layout = QGridLayout()
         layout.addWidget(self.patient_table)
         sub_layout.addWidget(self.retrieve_label, 0, 0)
-        sub_layout.addWidget(self.text_keyword, 0, 1)
+        sub_layout.addWidget(self.text_keyword, 0, 1, 1, 2)
         sub_layout.addWidget(self.back_button, 1, 0)
         sub_layout.addWidget(self.retrieve_button, 1, 1)
         sub_layout.addWidget(self.clear_button, 1, 2)
