@@ -13,7 +13,7 @@ class ListNotesGUI(QMainWindow):
         self.parent = parent
         self.controller = controller
         self.setWindowTitle("List Notes")
-        self.resize(600, 400)
+        self.setFixedSize(500, 400)
 
         self.note_table = QTableView()
         self.note_model = NoteTableModel(self.controller)
