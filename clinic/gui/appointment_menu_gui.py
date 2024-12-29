@@ -19,6 +19,7 @@ class AppointmentMenuGUI(QMainWindow):
         self.parent = parent
         self.controller = controller
         self.setWindowTitle("APPOINTMENT MENU")
+        self.setFixedSize(250, 275)
         layout = QGridLayout()
 
         self.button_create = QPushButton("Add new note")
