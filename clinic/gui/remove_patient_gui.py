@@ -12,6 +12,8 @@ class RemovePatientGUI(QMainWindow):
         self.parent = parent
         self.controller = controller
         self.setWindowTitle("REMOVE PATIENT")
+        self.setFixedWidth(250)
+        self.setFixedHeight(200)
         layout = QGridLayout()
         self.label_phn = QLabel("Enter Phn")
         self.text_phn = QLineEdit()
