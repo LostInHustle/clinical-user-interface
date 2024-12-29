@@ -13,6 +13,7 @@ class UpdateNoteGUI(QMainWindow):
         self.parent = parent
         self.controller = controller
         self.setWindowTitle("UPDATE NOTE")
+        self.setFixedSize(300, 150)
         layout = QGridLayout()
 
         self.label_note = QLabel("Note Obtained")
@@ -25,12 +26,12 @@ class UpdateNoteGUI(QMainWindow):
         self.button_update = QPushButton("Update")
 
         layout.addWidget(self.label_note, 0, 0)
-        layout.addWidget(self.text_note, 0, 1)
+        layout.addWidget(self.text_note, 0, 1, 1, 2)
         layout.addWidget(self.keycode, 1, 0)
-        layout.addWidget(self.text_keycode, 1, 1)
-        layout.addWidget(self.button_search, 1, 2)
+        layout.addWidget(self.text_keycode, 1, 1, 1, 2)
         layout.addWidget(self.button_goback, 2, 0)
         layout.addWidget(self.button_update, 2, 1)
+        layout.addWidget(self.button_search, 2, 2)
 
         widget = QWidget()
         widget.setLayout(layout)
