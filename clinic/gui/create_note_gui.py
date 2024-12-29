@@ -12,6 +12,7 @@ class CreateNoteGUI(QMainWindow):
         self.parent = parent
         self.controller = controller
         self.setWindowTitle("Create Note")
+        self.setFixedSize(200, 100)
         layout = QGridLayout()
 
         label_note = QLabel("Note")
