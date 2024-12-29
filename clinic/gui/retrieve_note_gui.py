@@ -1,6 +1,7 @@
 from clinic.controller import Controller
 from clinic.exception.no_current_patient_exception import NoCurrentPatientException
 from clinic.gui.note_table_model import NoteTableModel
+from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import QMainWindow, QGridLayout, QVBoxLayout, QTableView
 from PyQt6.QtWidgets import QWidget, QLabel, QLineEdit, QPushButton, QMessageBox
 
@@ -15,13 +16,15 @@ class RetrieveNoteGUI(QMainWindow):
         self.parent = parent
         self.controller = controller
         self.setWindowTitle("Retrieve Notes")
-        self.resize(600, 400)
+        self.setFixedWidth(600)
+        self.setFixedHeight(400)
 
         self.note_table = QTableView()
         self.note_model = NoteTableModel(self.controller)
         self.note_table.setModel(self.note_model)
 
         self.retrieve_label = QLabel("Enter Text")
+        self.retrieve_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.text_note_number = QLineEdit()
         self.retrieve_button = QPushButton("Retrieve")
         self.back_button = QPushButton("Back")
