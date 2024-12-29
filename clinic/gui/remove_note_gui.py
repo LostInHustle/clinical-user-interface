@@ -17,7 +17,7 @@ class RemoveNoteGUI(QMainWindow):
         self.setFixedHeight(100)
         layout = QGridLayout()
 
-        self.label_code = QLabel("Enter code")
+        self.label_code = QLabel("Enter Code")
         self.text_code = QLineEdit()
         self.button_goback = QPushButton("Back")
         self.button_remove = QPushButton("Remove Note")
