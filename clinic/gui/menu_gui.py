@@ -21,6 +21,7 @@ class MenuGUI(QMainWindow):
         self.parent = parent
         self.controller = controller
         self.setWindowTitle("SYSTEM MENU")
+        self.setFixedSize(300, 350)
         layout = QGridLayout()
 
         self.button_create = QPushButton("Add new patient")
