@@ -14,6 +14,8 @@ class ClinicGUI(QMainWindow):
         super().__init__()
         self.controller = Controller(autosave = True)
         self.setWindowTitle("MEDICAL CLINIC SYSTEM")
+        self.setFixedWidth(250)
+        self.setFixedHeight(150)
         layout = QGridLayout()
 
         label_username = QLabel("Username")
