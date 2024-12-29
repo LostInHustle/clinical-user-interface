@@ -12,7 +12,7 @@ class SearchPatientGUI(QMainWindow):
         self.parent = parent
         self.controller = controller
         self.setWindowTitle("SEARCH FOR PATIENT")
-        self.setFixedSize(200, 275)
+        self.setFixedSize(250, 275)
         layout = QGridLayout()
 
         label_phn = QLabel("Phn")
