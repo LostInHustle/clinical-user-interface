@@ -38,7 +38,7 @@ class RetrieveNoteGUI(QMainWindow):
         sub_layout = QGridLayout()
         layout.addWidget(self.note_table)
         sub_layout.addWidget(self.retrieve_label, 0, 0)
-        sub_layout.addWidget(self.text_note_number, 0, 1)
+        sub_layout.addWidget(self.text_note_number, 0, 1, 1, 2)
         sub_layout.addWidget(self.back_button, 1, 0)
         sub_layout.addWidget(self.retrieve_button, 1, 1)
         sub_layout.addWidget(self.clear_button, 1, 2)
