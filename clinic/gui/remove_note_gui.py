@@ -13,6 +13,8 @@ class RemoveNoteGUI(QMainWindow):
         self.parent = parent
         self.controller = controller
         self.setWindowTitle("REMOVE NOTE")
+        self.setFixedWidth(275)
+        self.setFixedHeight(100)
         layout = QGridLayout()
 
         self.label_code = QLabel("Enter code")
