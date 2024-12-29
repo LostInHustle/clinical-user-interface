@@ -12,6 +12,8 @@ class UpdatePatientGUI(QMainWindow):
         self.parent = parent
         self.controller = controller
         self.setWindowTitle("UPDATE PATIENT")
+        self.setFixedWidth(250)
+        self.setFixedHeight(350)
         layout = QGridLayout()
 
         label_phn = QLabel("New Phn")
@@ -48,7 +50,7 @@ class UpdatePatientGUI(QMainWindow):
         layout.addWidget(self.text_address, 5, 1)
         layout.addWidget(label_name_key, 6, 0)
         layout.addWidget(self.text_key, 6, 1)
-        layout.addWidget(self.button_search, 7, 1)
+        layout.addWidget(self.button_search, 7, 0, 1, 2)
         layout.addWidget(self.button_goback, 8, 0)
         layout.addWidget(self.button_update, 8, 1)
 
