@@ -12,6 +12,8 @@ class CreatePatientGUI(QMainWindow):
         self.parent = parent
         self.controller = controller
         self.setWindowTitle("Create Patient")
+        self.setFixedWidth(200)
+        self.setFixedHeight(250)
         layout = QGridLayout()
 
         label_phn = QLabel("Phn")
