@@ -1,46 +1,55 @@
 Clinical User Interface
 
-This project is a Clinical User Interface made with Python and PyQt6. It helps manage patient data and shows clinical information in a simple way for users.
+This project is a Clinical User Interface built with Python and PyQt6. It helps manage patient data and presents clinical information in a user-friendly way.
 
 Features
-
 	•	Patient Management: Add, edit, and view patient details.
 	•	Data Visualization: Display clinical data with simple charts.
 	•	User Authentication: Secure login with username and password.
-	•	Simple and Easy-to-Use Interface: Designed to be user-friendly.
+	•	Simple and Easy-to-Use Interface: Designed for ease of use.
 
 Requirements
-
 	•	Python 3.8 or higher
 	•	PyQt6 library installed
 
-How to Install and Run
-
-	1.	Download or clone the project from GitHub:
+Installation and Usage
+	1.	Clone the project from GitHub:
 
 git clone https://github.com/LostInHustle/clinical-user-interface
 
 
-	2.	Go to the project folder:
+	2.	Navigate to the project folder:
 
 cd clinical-user-interface
 
 
-	3.	Run the project with this command:
+	3.	Run the application:
 
 python -m clinic gui
 
 
-	4.	Open the application and use these login details:
+	4.	Open the application and log in using the following credentials:
 	•	Username: user
 	•	Password: 123456
-	5.	After login, you can start using the interface to manage patient data.
+	5.	After logging in, you can start managing patient data.
 
 Contributing
 
-If you want to help make this project better:
+If you’d like to contribute:
 	1.	Fork the project on GitHub.
-	2.	Create a new branch (git checkout -b your-feature-name).
-	3.	Add your changes and commit them (git commit -m 'Describe your changes').
-	4.	Push the changes (git push origin your-feature-name).
+	2.	Create a new branch:
+
+git checkout -b your-feature-name
+
+
+	3.	Add your changes and commit them:
+
+git commit -m "Describe your changes"
+
+
+	4.	Push your changes:
+
+git push origin your-feature-name
+
+
 	5.	Open a pull request for review.
