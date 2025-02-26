@@ -18,22 +18,22 @@ How to Install and Run
 
 	1.	Download or clone the project from GitHub:
 
-##git clone https://github.com/LostInHustle/clinical-user-interface
+git clone https://github.com/LostInHustle/clinical-user-interface
 
 
 	2.	Go to the project folder:
 
-##cd clinical-user-interface
+cd clinical-user-interface
 
 
 	3.	Run the project with this command:
 
-##python -m clinic gui
+python -m clinic gui
 
 
 	4.	Open the application and use these login details:
-	##•	Username: user
-	##•	Password: 123456
+	•	Username: user
+	•	Password: 123456
 	5.	After login, you can start using the interface to manage patient data.
 
 Contributing
