@@ -34,9 +34,9 @@ This project is a Clinical User Interface built with Python and PyQt6. It provid
    After logging in, you can begin managing patient data through the interface.
 
 ### Terminal Commands
-git clone https://github.com/LostInHustle/clinical-user-interface
-cd clinical-user-interface
-python -m clinic gui
+- git clone https://github.com/LostInHustle/clinical-user-interface
+- cd clinical-user-interface
+- python -m clinic gui
 
 ## Contributing
 
@@ -49,11 +49,6 @@ We welcome contributions to improve this project! To contribute:
 5. Open a pull request on GitHub for review.
 
 ### Contribution Commands
-git checkout -b your-feature-name
-git commit -m "Describe your changes"
-git push origin your-feature-name
-How to Use This:
-Copy the entire text above.
-Open a text editor (e.g., Notepad, VS Code).
-Paste the text into the editor.
-Save it as README.md in your clinical-user-interface project folder.
+- git checkout -b your-feature-name
+- git commit -m "Describe your changes"
+- git push origin your-feature-name
