@@ -1,42 +1,48 @@
-# Import necessary modules and classes.
-from clinic.patient_record import *
-from clinic.dao.patient_dao_json import *
+"""Controller module for the clinical user interface."""
+from clinic.patient_record import PatientRecord
+from clinic.dao.patient_dao_json import PatientDAOJSON
 from clinic.exception.invalid_login_exception import InvalidLoginException
 from clinic.exception.duplicate_login_exception import DuplicateLoginException
 from clinic.exception.invalid_logout_exception import InvalidLogoutException
 from clinic.exception.illegal_access_exception import IllegalAccessException
 from clinic.exception.illegal_operation_exception import IllegalOperationException
 from clinic.exception.no_current_patient_exception import NoCurrentPatientException
-# Used for password hashing.
 import hashlib
+
 
 class Controller:
     def __init__(self, autosave: bool = False):
-        '''
+        """
         Initializes a Controller object.
         This manages patient records and user authentication.
-        '''
+        
+        Args:
+            autosave: If True, automatically saves data after any modification.
+        """
         self.logged_in = False
         self.autosave = autosave
         self.patient_dao = PatientDAOJSON(autosave)
         self.current_patient = None
     
-    def get_password_hash(self, password: str):
-        '''
+    def get_password_hash(self, password: str) -> str:
+        """
         Returns the SHA-256 hash of the given password string.
         Used to securely store and compare passwords.
-        '''
+        """
         password = password.encode('utf-8')
         password = hashlib.sha256(password)
         new_password = password.hexdigest()
         return new_password
 
-    def login(self, username: str, password: str):
-        '''
+    def login(self, username: str, password: str) -> bool:
+        """
         Authenticates the user with the given username and password.
-        If successful, sets self.logged_in to True. Raises InvalidLoginException
-        if credentials are incorrect and DuplicateLoginException if already logged in.
-        '''
+        If successful, sets self.logged_in to True.
+        
+        Raises:
+            InvalidLoginException: If credentials are incorrect.
+            DuplicateLoginException: If already logged in.
+        """
         user_list = []
         password_list = []
         with open('clinic/users.txt', 'r') as file_handle:
@@ -55,11 +61,13 @@ class Controller:
         else:
             raise DuplicateLoginException()
     
-    def logout(self):
-        '''
+    def logout(self) -> bool:
+        """
         Logs out the user by setting self.logged_in to False.
-        Raises InvalidLogoutException if the user is not logged in.
-        '''
+        
+        Raises:
+            InvalidLogoutException: If the user is not logged in.
+        """
         if not self.logged_in:
             raise InvalidLogoutException()
         else:
@@ -67,43 +75,51 @@ class Controller:
             return True
         
     def create_patient(self, phn: int, name: str, birth_date: str, 
-                       phone: str, email: str, address: str):
-        '''
+                       phone: str, email: str, address: str) -> 'Patient':
+        """
         Creates and adds a new Patient object to the patient list if logged in.
-        Returns the Patient object on success. Raises IllegalAccessException if not logged in.
-        '''
+        
+        Raises:
+            IllegalAccessException: If not logged in.
+        """
         if self.logged_in:
             return self.patient_dao.create_patient(phn, name, birth_date, phone, email, address)
         else:
             raise IllegalAccessException()
 
-    def search_patient(self, phn: int):
-        '''
+    def search_patient(self, phn: int) -> 'Patient':
+        """
         Searches for a patient by PHN if logged in.
-        Returns the Patient object if found, otherwise None. Raises IllegalAccessException if not logged in.
-        '''
+        
+        Raises:
+            IllegalAccessException: If not logged in.
+        """
         if self.logged_in:
             return self.patient_dao.search_patient(phn)
         else:
             raise IllegalAccessException()
         
-    def retrieve_patients(self, key: str):
-        '''
+    def retrieve_patients(self, key: str) -> list:
+        """
         Retrieves a list of Patient objects with names matching the given key if logged in.
-        Raises IllegalAccessException if not logged in.
-        '''
+        
+        Raises:
+            IllegalAccessException: If not logged in.
+        """
         if self.logged_in:
             return self.patient_dao.retrieve_patients(key)
         else:
             raise IllegalAccessException()
     
     def update_patient(self, old_phn: int, phn: int, name: str, 
-                       birth_date: str, phone: str, email: str, address: str):
-        '''
+                       birth_date: str, phone: str, email: str, address: str) -> bool:
+        """
         Updates patient information for a given old PHN if logged in.
-        Raises IllegalOperationException if the patient being updated is the current patient or if there is a PHN conflict.
-        Raises IllegalAccessException if not logged in.
-        '''
+        
+        Raises:
+            IllegalOperationException: If the patient being updated is the current patient or if there is a PHN conflict.
+            IllegalAccessException: If not logged in.
+        """
         if self.logged_in:
             if self.search_patient(old_phn) == self.current_patient:
                 raise IllegalOperationException()
@@ -113,12 +129,14 @@ class Controller:
         else:
             raise IllegalAccessException()
     
-    def delete_patient(self, phn: int):
-        '''
+    def delete_patient(self, phn: int) -> bool:
+        """
         Deletes a Patient object identified by PHN if logged in.
-        Raises IllegalOperationException if the patient is the current patient.
-        Raises IllegalAccessException if not logged in.
-        '''
+        
+        Raises:
+            IllegalOperationException: If the patient is the current patient.
+            IllegalAccessException: If not logged in.
+        """
         if self.logged_in:
             if self.search_patient(phn) == self.current_patient:
                 raise IllegalOperationException()
@@ -127,21 +145,25 @@ class Controller:
         else:
             raise IllegalAccessException()
     
-    def list_patients(self):
-        '''
+    def list_patients(self) -> list:
+        """
         Returns a list of all Patient objects if logged in.
-        Raises IllegalAccessException if not logged in.
-        '''
+        
+        Raises:
+            IllegalAccessException: If not logged in.
+        """
         if self.logged_in:
             return self.patient_dao.list_patients()
         else:
             raise IllegalAccessException()
         
-    def get_current_patient(self):
-        '''
+    def get_current_patient(self) -> 'Patient':
+        """
         Returns the current patient if one is set and the user is logged in.
-        Raises IllegalAccessException if not logged in.
-        '''
+        
+        Raises:
+            IllegalAccessException: If not logged in.
+        """
         if self.logged_in:
             if self.current_patient is None:
                 return None
@@ -150,12 +172,14 @@ class Controller:
         else:
             raise IllegalAccessException()
     
-    def set_current_patient(self, phn: int):
-        '''
+    def set_current_patient(self, phn: int) -> bool:
+        """
         Sets the current patient using the given PHN if logged in.
-        Raises IllegalOperationException if the PHN is not found in the patient list.
-        Raises IllegalAccessException if not logged in.
-        '''
+        
+        Raises:
+            IllegalOperationException: If the PHN is not found in the patient list.
+            IllegalAccessException: If not logged in.
+        """
         if self.logged_in:
             patient_list = self.patient_dao.patient_list
             phn_list = [patient.phn for patient in patient_list]
@@ -168,21 +192,25 @@ class Controller:
             raise IllegalAccessException()
     
     def unset_current_patient(self):
-        '''
+        """
         Clears the current patient by setting it to None if logged in.
-        Raises IllegalAccessException if not logged in.
-        '''
+        
+        Raises:
+            IllegalAccessException: If not logged in.
+        """
         if self.logged_in:
             self.current_patient = None
         else:
             raise IllegalAccessException()
 
-    def create_note(self, text: str):
-        '''
+    def create_note(self, text: str) -> 'Note':
+        """
         Creates a new Note object for the current patient if logged in.
-        Raises NoCurrentPatientException if there is no current patient.
-        Raises IllegalAccessException if not logged in.
-        '''
+        
+        Raises:
+            NoCurrentPatientException: If there is no current patient.
+            IllegalAccessException: If not logged in.
+        """
         if self.logged_in:
             current_patient = self.get_current_patient()
             if current_patient is not None:
@@ -194,12 +222,14 @@ class Controller:
         else:
             raise IllegalAccessException()
     
-    def search_note(self, num: int):
-        '''
+    def search_note(self, num: int) -> 'Note':
+        """
         Searches for a Note object in the current patient's record using a note number if logged in.
-        Returns the Note object if found. Raises NoCurrentPatientException if there is no current patient.
-        Raises IllegalAccessException if not logged in.
-        '''
+        
+        Raises:
+            NoCurrentPatientException: If there is no current patient.
+            IllegalAccessException: If not logged in.
+        """
         if self.logged_in:
             current_patient = self.get_current_patient()
             if current_patient is None:
@@ -211,12 +241,14 @@ class Controller:
         else:
             raise IllegalAccessException()
 
-    def retrieve_notes(self, txt: str):
-        '''
+    def retrieve_notes(self, txt: str) -> list:
+        """
         Retrieves all Note objects containing the given text for the current patient if logged in.
-        Raises NoCurrentPatientException if there is no current patient.
-        Raises IllegalAccessException if not logged in.
-        '''
+        
+        Raises:
+            NoCurrentPatientException: If there is no current patient.
+            IllegalAccessException: If not logged in.
+        """
         if self.logged_in:
             current_patient = self.get_current_patient()
             if current_patient is None:
@@ -228,12 +260,14 @@ class Controller:
         else:
             raise IllegalAccessException()
 
-    def update_note(self, code: int, text: str):
-        '''
+    def update_note(self, code: int, text: str) -> bool:
+        """
         Updates the text and date of a Note object identified by code in the current patient's record if logged in.
-        Raises NoCurrentPatientException if there is no current patient.
-        Raises IllegalAccessException if not logged in.
-        '''
+        
+        Raises:
+            NoCurrentPatientException: If there is no current patient.
+            IllegalAccessException: If not logged in.
+        """
         if self.logged_in:
             current_patient = self.get_current_patient()
             if current_patient is None:
@@ -244,12 +278,14 @@ class Controller:
         else:
             raise IllegalAccessException()
 
-    def delete_note(self, code: int):
-        '''
+    def delete_note(self, code: int) -> bool:
+        """
         Deletes a Note object identified by code from the current patient's record if logged in.
-        Raises NoCurrentPatientException if there is no current patient.
-        Raises IllegalAccessException if not logged in.
-        '''
+        
+        Raises:
+            NoCurrentPatientException: If there is no current patient.
+            IllegalAccessException: If not logged in.
+        """
         if self.logged_in:
             current_patient = self.get_current_patient()
             if current_patient is None:
@@ -261,12 +297,14 @@ class Controller:
         else:
             raise IllegalAccessException()
     
-    def list_notes(self):
-        '''
+    def list_notes(self) -> list:
+        """
         Returns all Note objects from the current patient's record in reverse order if logged in.
-        Raises NoCurrentPatientException if there is no current patient.
-        Raises IllegalAccessException if not logged in.
-        '''
+        
+        Raises:
+            NoCurrentPatientException: If there is no current patient.
+            IllegalAccessException: If not logged in.
+        """
         if self.logged_in:
             current_patient = self.get_current_patient()
             if current_patient is None:
