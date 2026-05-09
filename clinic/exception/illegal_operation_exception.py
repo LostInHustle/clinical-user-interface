@@ -1,2 +1,5 @@
+"""Exception classes for illegal operation errors."""
+
+
 class IllegalOperationException(Exception):
-	''' Illegal Operation '''
+    """Raised when an illegal operation is attempted."""

@@ -1,2 +1,5 @@
+"""Exception classes for illegal access operations."""
+
+
 class IllegalAccessException(Exception):
-	''' Illegal Access '''
+    """Raised when an illegal access operation is attempted."""

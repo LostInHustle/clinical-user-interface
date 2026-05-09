@@ -1,2 +1,5 @@
+"""Exception classes for invalid login errors."""
+
+
 class InvalidLoginException(Exception):
-	''' Invalid Login '''
+    """Raised when login credentials are invalid."""
